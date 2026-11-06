@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+/* ── Brand tokens ─────────────────────────────────────────────
+   Change these to re-skin the whole app. */
+@theme {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --color-navy-950: #070f24;
+  --color-navy-900: #0b1b3f;
+  --color-navy-800: #13285a;
+  --color-navy-700: #1e3a78;
+  --color-navy-600: #2e4f96;
+  --color-navy-500: #4c6bb0;
+  --color-navy-300: #9fb0d6;
+  --color-navy-200: #c9d3ea;
+  --color-navy-100: #e6ebf5;
+  --color-navy-50: #f3f5fa;
+
+  --color-lime-100: #f5ffd6;
+  --color-lime-200: #ebffad;
+  --color-lime-300: #dcff70;
+  --color-lime-400: #c8f53c;
+  --color-lime-500: #a9d61a;
+  --color-lime-600: #7fa30d;
+  --color-lime-700: #5c7609;
+
+  --color-cream-50: #fffdf8;
+  --color-cream-100: #faf6ee;
+  --color-cream-200: #f2ecdf;
+  --color-cream-300: #e6ddca;
+
+  --color-coral-50: #fff4f1;
+  --color-coral-100: #ffe3dc;
+  --color-coral-200: #ffc5b8;
+  --color-coral-400: #ff8a73;
+  --color-coral-500: #ff6f59;
+  --color-coral-600: #e5533d;
+  --color-coral-700: #b93b28;
+  --color-coral-800: #8f2a1b;
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+
+  --shadow-card: 0 1px 2px rgb(11 27 63 / 0.04), 0 8px 24px -12px rgb(11 27 63 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(11 27 63 / 0.06), 0 18px 40px -16px rgb(11 27 63 / 0.28);
+
+  --animate-rise: rise 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-pop: pop 0.35s cubic-bezier(0.2, 0.8, 0.2, 1.4) both;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 2s ease-out infinite;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pop {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+  }
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgb(200 245 60 / 0.7); }
+    80%, 100% { box-shadow: 0 0 0 12px rgb(200 245 60 / 0); }
+  }
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    @apply bg-cream-100 text-navy-900 antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-navy-700);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  .on-dark :focus-visible { outline-color: var(--color-lime-400); }
+  ::selection { background: var(--color-lime-300); color: var(--color-navy-900); }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
+}
+
+@utility card {
+  @apply rounded-3xl bg-white shadow-card ring-1 ring-navy-900/5;
+}
+@utility field-input {
+  @apply block w-full rounded-xl border-0 bg-white px-4 py-3 text-base text-navy-900 ring-1 ring-navy-900/15 transition placeholder:text-navy-900/40 focus:ring-2 focus:ring-navy-700 focus:outline-none aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-coral-600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
